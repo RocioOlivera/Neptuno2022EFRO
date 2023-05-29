@@ -117,18 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="lblImporte.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="lblImporteRecibido.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="lblImporteRecibido.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="lblVuelto.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnCancelar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAZ5JREFUSEvd
+        lc9Kw0AQxgsi+iC+Qcmux5pdEIWqqFVBH0e8SsGroKDgQcGLb2Kx1doiVY89uFkEJV1nlknTJNt/Qg76
+        wQ+G2ZkvZGezKfxvmZWFuUB4B9rnN0qw50CyLoKxFt41rO1jDZVPJyX4diBYGzBjaCnJt6htvEylMhMI
+        XnUYjUZ6x9hLNsMFr37iNJgIXiUbt7RgG+7Gielp3yuTXVKmVJqHguyeS250uZTMAa4c0XIOHoa6lymW
+        i+b77taEnRejd1b7eYwxh2tYk+gBlM8qZBsL9u8qXajXfBO2mwYVtppGby5bMO7nykuJHovPLsk2lpbs
+        KVMI6HVhwnrNGvbeX00IoDCHa64eoE62sWDAylFosQ9pNqwxCuMR5sgH2caCZJAq6mP3/K1D9vAmEA/O
+        xIHzAY1UkSUaKCp8rFtsnBp8Ap8/kG2s3IfsPKbA18VpZqDR4HFtsDbCeUxNsTgLi9ltmv5Dux96J+V6
+        VUSCO/7I0TgRSrJDshmu3K/rSLn9cAaFtyKdrnOgBnwSGJ8p4e3++pf5R1Qo/ACFJFtBUwzd9gAAAABJ
+        RU5ErkJggg==
+</value>
+  </data>
   <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Neptuno2022EF.Entidades.Entidades;
+using NuevaAppComercial2022.Entidades.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,9 @@ namespace Neptuno2022EF.Entidades.Dtos.CtaCte
         public string Movimiento { get; set; }
         public decimal Debe { get; set; }
         public decimal Haber { get; set; }
+        public CtaCteListDto ctaCteListDto { get; set; }
+
+        public Persona cliente;
 
     }
 }

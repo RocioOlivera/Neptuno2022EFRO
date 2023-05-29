@@ -92,7 +92,7 @@ namespace Neptuno2022EF.Windows.Helpers
                 //    r.Cells[1].Value = ctaCteDto.Saldo;
                 //    break;
                 case DetalleCtaCteListDto detalle:
-                    r.Cells[0].Value = detalle.FechaMovimiento;
+                    r.Cells[0].Value = detalle.FechaMovimiento.ToShortDateString();
                     r.Cells[1].Value = detalle.Movimiento;
                     r.Cells[2].Value = detalle.Debe;
                     r.Cells[3].Value = detalle.Haber;

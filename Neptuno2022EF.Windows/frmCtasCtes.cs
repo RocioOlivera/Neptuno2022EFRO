@@ -94,7 +94,7 @@ namespace Neptuno2022EF.Windows
             try
             {
                 List<DetalleCtaCteListDto> ctaCteDetalleDto = _servicio.GetDetalleCtasCtes(cta.ClienteId);
-                frmDetalleCtaCte frm = new frmDetalleCtaCte() { Text = "Detalle de la Venta" };
+                frmDetalleCtaCte frm = new frmDetalleCtaCte() { Text = "Detalle de la Cuenta" };
                 frm.SetCtaCte(ctaCteDetalleDto);
                 frm.ShowDialog(this);
             }

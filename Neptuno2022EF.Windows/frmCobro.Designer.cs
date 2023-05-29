@@ -111,6 +111,7 @@
             this.btnVisa.Text = "Visa";
             this.btnVisa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnVisa.UseVisualStyleBackColor = true;
+            this.btnVisa.Click += new System.EventHandler(this.btnVisa_Click);
             // 
             // btnEfectivo
             // 
@@ -122,6 +123,7 @@
             this.btnEfectivo.Text = "Efectivo";
             this.btnEfectivo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEfectivo.UseVisualStyleBackColor = true;
+            this.btnEfectivo.Click += new System.EventHandler(this.btnEfectivo_Click);
             // 
             // lblImporte
             // 
@@ -134,6 +136,7 @@
             this.lblImporte.TabIndex = 0;
             this.lblImporte.Text = "0.00";
             this.lblImporte.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblImporte.Click += new System.EventHandler(this.lblImporte_Click);
             // 
             // groupBox3
             // 
@@ -209,6 +212,7 @@
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnOk
             // 
@@ -220,6 +224,7 @@
             this.btnOk.Text = "OK";
             this.btnOk.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // errorProvider1
             // 

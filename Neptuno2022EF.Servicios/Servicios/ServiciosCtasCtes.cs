@@ -49,33 +49,30 @@ namespace Neptuno2022EF.Servicios.Servicios
         }
         public void Guardar(CtaCte ctaCte)
         {
-            //try
-            //{
-            //    using (var transaction = new TransactionScope())
-            //    {
-            //        var ctaCteGuardar = new CtaCte()
-            //        {
-            //            ClienteId = venta.ClienteId,
-            //            FechaVenta = venta.FechaVenta,
-            //            Total = venta.Total
-            //        };
-            //        _repositorio.Agregar(ctaCteGuardar);
-            //        _unitOfWork.SaveChanges();
-            //        foreach (var item in ctaCte.Detalles)
-            //        {
-            //            item.VentaId = ventaGuardar.VentaId;
-            //            _repoDetalleVentas.Agregar(item);
-            //            _repoProductos.ActualizarStock(item.ProductoId, item.Cantidad);
-            //        }
-            //        _unitOfWork.SaveChanges();
-            //        transaction.Complete();
-            //    }
-            //}
-            //catch (Exception)
-            //{
+            try
+            {
+                using (var transaction = new TransactionScope())
+                {
+                    var ctaCteGuardar = new CtaCte()
+                    {
+                        FechaMovimiento = ctaCte.FechaMovimiento,
+                        Movimiento = ctaCte.Movimiento,
+                        Debe = ctaCte.Debe,
+                        Haber = ctaCte.Haber,
+                        Saldo = ctaCte.Saldo,
+                        ClienteId = ctaCte.ClienteId
+                    };
+                    _repositorio.Agregar(ctaCteGuardar);
+                    _unitOfWork.SaveChanges();
 
-            //    throw;
-            //}
+                    transaction.Complete();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
     

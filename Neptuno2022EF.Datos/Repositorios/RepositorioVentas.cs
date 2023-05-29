@@ -1,9 +1,11 @@
 ﻿using Neptuno2022EF.Datos.Interfaces;
 using Neptuno2022EF.Entidades.Dtos.Venta;
 using Neptuno2022EF.Entidades.Entidades;
+using Neptuno2022EF.Entidades.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace Neptuno2022EF.Datos.Repositorios
@@ -22,11 +24,59 @@ namespace Neptuno2022EF.Datos.Repositorios
             _context.Ventas.Add(venta);
         }
 
-        public List<VentaListDto> Filtrar(Func<Venta, bool> predicado)
+        public List<VentaListDto> Filtrar(Func<Venta, bool> predicado, int cantidad, int pagina)
         {
-            throw new NotImplementedException();
+            return _context.Ventas.Include(v => v.Cliente).Where(predicado).OrderBy(v => v.FechaVenta)
+                                  .Skip(cantidad * (pagina - 1)).Take(cantidad).Select(v => new VentaListDto
+            {
+                VentaId = v.VentaId,
+                FechaVenta = v.FechaVenta,
+                Cliente = v.Cliente.Nombre,
+                Total = v.Total,
+                Estado = v.Estado.ToString()
+            }).ToList();
         }
+        public int GetCantidad()
+        {
+            return _context.Ventas.Count();
+        }
+        public int GetCantidad(Func<Venta, bool> predicado)
+        {
+            return _context.Ventas.Count(predicado);
+        }
+        public List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada)
+        {
+            try
+            {
+                return _context.Ventas.Include(v => v.Cliente).
+                    Where(v => v.FechaVenta == fechaSeleccionada).OrderBy(v => v.FechaVenta).Select(v => new VentaListDto
+                    {
+                        VentaId = v.VentaId,
+                        FechaVenta = v.FechaVenta,
+                        Cliente = v.Cliente.Nombre,
+                        Total = v.Total,
+                        Estado = v.Estado.ToString()
+                    }).ToList();
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
+        public List<VentaListDto> GetVentasPorPagina(int cantidad, int pagina)
+        {
+            return _context.Ventas.Include(v => v.Cliente).OrderBy(v => v.ClienteId).
+                Skip(cantidad * (pagina - 1)).Take(cantidad).Select
+                (v => new VentaListDto
+                {
+                    VentaId = v.VentaId,
+                    FechaVenta = v.FechaVenta,
+                    Cliente = v.Cliente.Nombre,
+                    Total = v.Total,
+                    Estado = v.Estado.ToString()
+                }).ToList();
+        }
         public Venta GetVentaPorId(int id)
         {
             throw new NotImplementedException();
@@ -45,6 +95,38 @@ namespace Neptuno2022EF.Datos.Repositorios
                     Total=v.Total,
                     Estado=v.Estado.ToString()
                 }).ToList();
+        }
+        public List<VentaListDto> GetVentas(int clienteId)
+        {
+            try
+            {
+                return _context.Ventas.Include(v => v.Cliente).
+                    Where(v => v.ClienteId == clienteId).Select(v => new VentaListDto
+                    {
+                        VentaId = v.VentaId,
+                        FechaVenta = v.FechaVenta,
+                        Cliente = v.Cliente.Nombre,
+                        Total = v.Total,
+                        Estado = v.Estado.ToString()
+                    }).ToList();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        private Venta ConstruirVenta(SqlDataReader reader)
+        {
+            return new Venta()
+            {
+                VentaId = reader.GetInt32(0),
+                ClienteId = reader.GetInt32(1),
+                FechaVenta = reader.GetDateTime(2),
+                Total = reader.GetDecimal(3),
+                Estado = (Estado)reader.GetInt32(4),
+                RowVersion = (byte[])reader[5]
+            };
         }
     }
 }

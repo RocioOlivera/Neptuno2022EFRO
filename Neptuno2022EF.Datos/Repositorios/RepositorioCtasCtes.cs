@@ -23,6 +23,12 @@ namespace Neptuno2022EF.Datos.Repositorios
         {
             _context.CtasCtes.Add(ctaCte);
         }
+
+        public CtaCte GetCtaCtePorId(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<CtaCteListDto> GetCtasCtes()
         {
             //return _context.CtasCtes

@@ -43,6 +43,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -130,6 +131,18 @@
     </Compile>
     <Compile Include="frmSeleccionarCategoria.Designer.cs">
       <DependentUpon>frmSeleccionarCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSeleccionarCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSeleccionarCliente.Designer.cs">
+      <DependentUpon>frmSeleccionarCliente.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSeleccionarFecha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSeleccionarFecha.Designer.cs">
+      <DependentUpon>frmSeleccionarFecha.cs</DependentUpon>
     </Compile>
     <Compile Include="frmSeleccionarPais.cs">
       <SubType>Form</SubType>
@@ -240,6 +253,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSeleccionarCategoria.resx">
       <DependentUpon>frmSeleccionarCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSeleccionarCliente.resx">
+      <DependentUpon>frmSeleccionarCliente.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSeleccionarFecha.resx">
+      <DependentUpon>frmSeleccionarFecha.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSeleccionarPais.resx">
       <DependentUpon>frmSeleccionarPais.cs</DependentUpon>

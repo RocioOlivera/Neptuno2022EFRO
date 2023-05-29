@@ -268,6 +268,7 @@
             this.btnIngresarPago.TabIndex = 8;
             this.btnIngresarPago.Text = "Ingresar Pago";
             this.btnIngresarPago.UseVisualStyleBackColor = true;
+            this.btnIngresarPago.Click += new System.EventHandler(this.btnIngresarPago_Click);
             // 
             // frmDetalleCtaCte
             // 
