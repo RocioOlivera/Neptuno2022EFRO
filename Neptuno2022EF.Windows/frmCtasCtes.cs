@@ -18,19 +18,21 @@ namespace Neptuno2022EF.Windows
 {
     public partial class frmCtasCtes : Form
     {
-        private readonly IServiciosCtasCtes _servicio;
+        private readonly IServiciosCtasCtes _servicioCtaCte;
+        private readonly IServiciosVentas _servicioVentas;
         private List<CtaCteListDto> lista;
-        public frmCtasCtes(IServiciosCtasCtes servicios)
+        public frmCtasCtes(IServiciosCtasCtes servicios, IServiciosVentas serviciosVentas)
         {
             InitializeComponent();
-            _servicio = servicios;
+            _servicioCtaCte = servicios;
+            _servicioVentas = serviciosVentas;
         }
 
         private void frmCtasCtes_Load(object sender, EventArgs e)
         {
             try
             {
-                lista = _servicio.GetCtasCtes();
+                lista = _servicioCtaCte.GetCtasCtes();
                 //FormHelper.MostrarDatosEnGrilla(dgvDatos, lista);
                 MostrarDatosGrilla(lista);
             }
@@ -93,8 +95,8 @@ namespace Neptuno2022EF.Windows
             var cta = (CtaCteListDto)r.Tag;
             try
             {
-                List<DetalleCtaCteListDto> ctaCteDetalleDto = _servicio.GetDetalleCtasCtes(cta.ClienteId);
-                frmDetalleCtaCte frm = new frmDetalleCtaCte() { Text = "Detalle de la Cuenta" };
+                List<DetalleCtaCteListDto> ctaCteDetalleDto = _servicioCtaCte.GetDetalleCtasCtes(cta.ClienteId);
+                frmDetalleCtaCte frm = new frmDetalleCtaCte(_servicioCtaCte) { Text = "Detalle de la Cuenta" };
                 frm.SetCtaCte(ctaCteDetalleDto);
                 frm.ShowDialog(this);
             }

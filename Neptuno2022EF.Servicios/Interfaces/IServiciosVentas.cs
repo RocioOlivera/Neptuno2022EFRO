@@ -21,5 +21,6 @@ namespace Neptuno2022EF.Servicios.Interfaces
         void Guardar(Venta venta);
         List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada);
         void Pagar(Venta venta, FormaPago forma, decimal importe);
+        void Editar(Venta venta);
     }
 }

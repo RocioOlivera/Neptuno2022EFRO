@@ -3,6 +3,7 @@ using Neptuno2022EF.Datos.Interfaces;
 using Neptuno2022EF.Entidades.Dtos.CtaCte;
 using Neptuno2022EF.Entidades.Entidades;
 using Neptuno2022EF.Servicios.Interfaces;
+using NuevaAppComercial2022.Entidades.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,27 @@ namespace Neptuno2022EF.Servicios.Servicios
     public class ServiciosCtasCtes :IServiciosCtasCtes
     {
         private readonly IRepositorioCtasCtes _repositorio;
+        private readonly IRepositorioVentas _repositorioVentas;
         private readonly IUnitOfWork _unitOfWork;
 
-        public ServiciosCtasCtes(IRepositorioCtasCtes repositorio, IUnitOfWork unitOfWork)
+        public ServiciosCtasCtes(IRepositorioCtasCtes repositorio, IRepositorioVentas repositorioVentas, IUnitOfWork unitOfWork)
         {
             _repositorio= repositorio;
+            _repositorioVentas=repositorioVentas;
             _unitOfWork = unitOfWork;
+        }
+
+        public void Agregar(CtaCte ctaCte)
+        {
+            try
+            {
+                _repositorio.Agregar(ctaCte);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<CtaCteListDto> GetCtasCtes()
@@ -35,6 +51,7 @@ namespace Neptuno2022EF.Servicios.Servicios
                 throw;
             }
         }
+     
         public List<DetalleCtaCteListDto> GetDetalleCtasCtes(int clienteId)
         {
             try
@@ -47,6 +64,20 @@ namespace Neptuno2022EF.Servicios.Servicios
                 throw;
             }
         }
+
+        public decimal GetSaldo(int clienteId)
+        {
+            try
+            {
+                return _repositorio.GetSaldo(clienteId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public void Guardar(CtaCte ctaCte)
         {
             try

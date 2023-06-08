@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualBasic;
+using Neptuno2022EF.Datos.Interfaces;
+using Neptuno2022EF.Entidades.Entidades;
 using Neptuno2022EF.Entidades.Enums;
+using Neptuno2022EF.Servicios.Interfaces;
 using Neptuno2022EF.Windows.Helpers;
 using Neptuno2022EF.Windows.Helpers.Enum;
 using System;
@@ -16,13 +19,21 @@ namespace Neptuno2022EF.Windows
 {
     public partial class frmCobro : Form
     {
-        public frmCobro()
+        private readonly IServiciosCtasCtes _serviciosCtasCtes;
+        private readonly IServiciosVentas _serviciosVentas;
+        
+        public frmCobro(IServiciosCtasCtes serviciosCtaCte, IServiciosVentas serviciosVentas)
         {
             InitializeComponent();
+            _serviciosCtasCtes = serviciosCtaCte;
+            _serviciosVentas = serviciosVentas;
         }
         private decimal monto;
         private decimal importe;
         private FormaPago formaPago = 0;
+        
+        private CtaCte ctaCte;
+        private Venta venta;
 
         public void SetMonto(decimal monto)
         {
@@ -32,8 +43,29 @@ namespace Neptuno2022EF.Windows
         {
             if (ValidarDatos())
             {
+                //venta.Estado = Estado.Paga;
+                //_serviciosVentas.Editar(venta);
+                //var saldo = _serviciosCtasCtes.GetSaldo(venta.ClienteId);//consulto el saldo del cliente
+                //var saldo = _repositorioCtasCtes.GetSaldo();
+
+                //Creo la clase ctacte y le paso los datos
+                var ctaCte = new CtaCte
+                {
+                    FechaMovimiento = DateTime.Now,
+                    ClienteId = 2,
+                    Debe = monto - importe,
+                    Haber = importe,
+                    Saldo = monto - importe,
+                    Movimiento = ConstruirMovimiento()
+
+                };
+                _serviciosCtasCtes.Agregar(ctaCte);
                 DialogResult = DialogResult.OK;
             }
+        }
+        private string ConstruirMovimiento()
+        {
+            return $"PAGO ";
         }
         private bool ValidarDatos()
         {
@@ -98,6 +130,16 @@ namespace Neptuno2022EF.Windows
         private void lblImporte_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void frmCobro_Load(object sender, EventArgs e)
+        {
+            lblImporte.Text = monto.ToString("N2");
+        }
+
+        public CtaCte GetMovimientoCtaCte()
+        {
+            return ctaCte;
         }
     }
 }

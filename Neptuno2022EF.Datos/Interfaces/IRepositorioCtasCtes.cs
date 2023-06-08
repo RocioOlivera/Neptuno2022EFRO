@@ -15,5 +15,7 @@ namespace Neptuno2022EF.Datos.Interfaces
         List<DetalleCtaCteListDto> GetDetalleCtasCtes(int clienteId);
         void Agregar(CtaCte ctaCte);
         CtaCte GetCtaCtePorId(int id);
+        decimal GetSaldo(int clienteId);
+        //decimal GetSaldo();
     }
 }

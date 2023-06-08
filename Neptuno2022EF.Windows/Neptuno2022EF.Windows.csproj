@@ -375,6 +375,10 @@
     <None Include="Resources\plus_24px.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Neptuno2022EF.Datos\Neptuno2022EF.Datos.csproj">
+      <Project>{F97ACCD6-F013-4112-AC97-140AACDB9604}</Project>
+      <Name>Neptuno2022EF.Datos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Neptuno2022EF.Entidades\Neptuno2022EF.Entidades.csproj">
       <Project>{5FA4A1AA-B0A9-4249-96DA-251D01AD459A}</Project>
       <Name>Neptuno2022EF.Entidades</Name>

@@ -5,6 +5,7 @@ using Neptuno2022EF.Entidades.Dtos.Venta;
 using Neptuno2022EF.Entidades.Entidades;
 using Neptuno2022EF.Entidades.Enums;
 using Neptuno2022EF.Servicios.Interfaces;
+using NuevaAppComercial2022.Entidades.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,16 +20,18 @@ namespace Neptuno2022EF.Servicios.Servicios
         private readonly IRepositorioVentas _repositorio;
         private readonly IRepositorioDetalleVentas _repoDetalleVentas;
         private readonly IRepositorioProductos _repoProductos;
+        private readonly IRepositorioCtasCtes _repoCtasCtes;
         private readonly IUnitOfWork _unitOfWork;
 
         public ServiciosVentas(IRepositorioVentas repositorio,
             IRepositorioDetalleVentas repoDetalleVentas,
-            IRepositorioProductos repoProductos,
+            IRepositorioProductos repoProductos, IRepositorioCtasCtes repositorioCtasCtes,
             IUnitOfWork unitOfWork)
         {
             _repositorio = repositorio;
             _repoDetalleVentas = repoDetalleVentas;
             _repoProductos = repoProductos;
+            _repoCtasCtes= repositorioCtasCtes;
             _unitOfWork = unitOfWork;
         }
 
@@ -160,29 +163,49 @@ namespace Neptuno2022EF.Servicios.Servicios
 
         public void Pagar(Venta venta, FormaPago forma, decimal importe)
         {
-    
-            
+
+
             //venta.Estado = Estado.Paga;
             //_repositorio.Editar(venta);
             //var saldo = _repoCtasCtes.GetSaldo(venta.ClienteId);//consulto el saldo del cliente
+            var saldo = _repoCtasCtes.GetSaldo(venta.ClienteId);
 
-            ////Creo la clase ctacte y le paso los datos
-            //var ctaCte = new CtaCte
-            //{
-            //    FechaMovimiento = DateTime.Now,
-            //    ClienteId = venta.ClienteId,
-            //    Debe = 0,
-            //    Haber = importe,
-            //    Saldo = saldo - importe,
-            //    Movimiento = ConstruirMovimiento(venta, forma)
+            //Creo la clase ctacte y le paso los datos
+            var ctaCte = new CtaCte
+            {
+                FechaMovimiento = DateTime.Now,
+                ClienteId = venta.ClienteId,
+                Debe = 0,
+                Haber = importe,
+                Saldo = saldo - importe,
+                Movimiento = ConstruirMovimiento(venta, forma)
 
-            //};
-            //_repoCtasCtes.Agregar(ctaCte);
+            };
+            _repoCtasCtes.Agregar(ctaCte);
 
         }
+
+        private string ConstruirMovimiento(Venta venta, FormaPago forma)
+        {
+            return $"PAGO {forma.ToString()} {venta.VentaId}";
+        }
+
         public List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada)
         {
             return _repositorio.FiltrarFecha(fechaSeleccionada);
+        }
+
+        public void Editar(Venta venta)
+        {
+            try
+            {
+                _repositorio.Editar(venta);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

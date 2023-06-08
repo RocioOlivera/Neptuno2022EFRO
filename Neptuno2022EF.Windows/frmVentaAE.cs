@@ -31,8 +31,22 @@ namespace Neptuno2022EF.Windows
         }
         private void CancelarButton_Click(object sender, EventArgs e)
         {
-            ActualizarUnidadesDisponibles();
-            DialogResult = DialogResult.Cancel;
+            if (ValidarProductoComprado())
+            {
+                //Creo un instancia de item de carrito
+                //y le asigno sus valores
+                var itemCarrito = new ItemCarrito()
+                {
+                    ProductoId = producto.ProductoId,
+                    Descripcion = producto.NombreProducto,
+                    Precio = producto.PrecioUnitario,
+                    Cantidad = (int)nudCantidad.Value
+
+                };
+
+                _servicioProductos.CancelarUnidadesEnPedido(itemCarrito.ProductoId, itemCarrito.Cantidad);
+                DialogResult = DialogResult.Cancel;
+            }
         }
 
         private void ActualizarUnidadesDisponibles()
@@ -245,7 +259,7 @@ namespace Neptuno2022EF.Windows
 
         private void dgvDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            if (btnBorrar.Selected)
             {
                 DialogResult dr = MessageBox.Show("¿Desea eliminar del pedido el item seleccionado?", "Pregunta",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
@@ -260,6 +274,16 @@ namespace Neptuno2022EF.Windows
                 MessageBox.Show("Item eliminado", "Mensaje", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 ActualizarTotal();
             }
+
+        }
+
+        private void frmVentaAE_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAgregarPais_Click(object sender, EventArgs e)
+        {
 
         }
     }

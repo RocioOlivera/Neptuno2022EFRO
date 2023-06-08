@@ -17,5 +17,6 @@ namespace Neptuno2022EF.Datos.Interfaces
 
         int GetCantidad(Func<Venta, bool> predicado);
         List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada);
+        void Editar(Venta venta);
     }
 }

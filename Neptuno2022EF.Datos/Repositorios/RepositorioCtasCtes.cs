@@ -71,5 +71,15 @@ namespace Neptuno2022EF.Datos.Repositorios
 
                 }).ToList();
         }
+
+        public decimal GetSaldo(int clienteId)
+        {
+            return _context.CtasCtes.Include(c => c.ClienteId).Where(c => c.ClienteId == clienteId).Max(c => c.CtaCteId);
+        }
+
+        //public decimal GetSaldo()
+        //{
+        //    return _context.CtasCtes.Include(c => c.ClienteId).Max(c => c.CtaCteId);
+        //}
     }
 }

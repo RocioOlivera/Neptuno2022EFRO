@@ -19,7 +19,7 @@ namespace Neptuno2022EF.Windows
             InitializeComponent();
         }
         private ClienteListDto clienteSeleccionado;
-        private VentaListDto fechaSeleccionada;
+
         public ClienteListDto GetCliente()
         {
             return clienteSeleccionado;

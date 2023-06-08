@@ -243,6 +243,7 @@
             this.Controls.Add(this.groupBox4);
             this.Name = "frmCobro";
             this.Text = "Cobro";
+            this.Load += new System.EventHandler(this.frmCobro_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

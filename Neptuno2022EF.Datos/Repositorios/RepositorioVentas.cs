@@ -79,7 +79,16 @@ namespace Neptuno2022EF.Datos.Repositorios
         }
         public Venta GetVentaPorId(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.Ventas.Include(v => v.ClienteId).SingleOrDefault(v => v.VentaId == id);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<VentaListDto> GetVentas()
@@ -127,6 +136,21 @@ namespace Neptuno2022EF.Datos.Repositorios
                 Estado = (Estado)reader.GetInt32(4),
                 RowVersion = (byte[])reader[5]
             };
+        }
+
+        public void Editar(Venta venta)
+        {
+            try
+            {              
+                var ciudadInDb = GetVentaPorId(venta.VentaId);
+
+                _context.Entry(venta).State = EntityState.Modified;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

@@ -1,20 +1,14 @@
-﻿using Neptuno2022EF.Entidades.Dtos.CtaCte;
-using Neptuno2022EF.Entidades.Dtos.DetalleVenta;
+﻿using Neptuno2022EF.Datos.Interfaces;
+using Neptuno2022EF.Entidades.Dtos.CtaCte;
 using Neptuno2022EF.Entidades.Entidades;
 using Neptuno2022EF.Entidades.Enums;
 using Neptuno2022EF.Servicios.Interfaces;
-using Neptuno2022EF.Servicios.Servicios;
 using Neptuno2022EF.Windows.Helpers;
 using Neptuno2022EF.Windows.Helpers.Enum;
 using NuevaAppComercial2022.Entidades.Entidades;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Neptuno2022EF.Windows
@@ -22,13 +16,19 @@ namespace Neptuno2022EF.Windows
     public partial class frmDetalleCtaCte : Form
     {
         private readonly IServiciosVentas _servicioVentas;
+        private readonly IServiciosCtasCtes _servicioCtasCtes;
+        private readonly IRepositorioCtasCtes _repoCtaCte;
+        private readonly IRepositorioVentas _repositorioVentas;
         List<DetalleCtaCteListDto> lista;
         List<CtaCte> listaCta;
         private DetalleCtaCteListDto detalle;
         private Cliente cliente;
-        public frmDetalleCtaCte()
+        private Venta venta;
+        public frmDetalleCtaCte(IServiciosCtasCtes servicioCtasCtes)
         {
             InitializeComponent();
+            _servicioCtasCtes= servicioCtasCtes;
+            //_repositorioVentas= repositorioVentas;
         }
         
         protected override void OnLoad(EventArgs e)
@@ -59,49 +59,52 @@ namespace Neptuno2022EF.Windows
         private void btnIngresarPago_Click(object sender, EventArgs e)
         {
 
-            //frmCobro frm = new frmCobro();
-            //frm.Text = "Ingreso de Pago";
-            //frm.SetMonto(decimal.Parse(txtSaldoTotal.Text));
-            //DialogResult dr = frm.ShowDialog(this);
-            //    if (dr == DialogResult.Cancel)
-            //    {
-            //        return;
-            //    }else
-            //    {
+            frmCobro frm = new frmCobro(_servicioCtasCtes, _servicioVentas );
+            frm.Text = "Ingreso de Pago";
+            frm.SetMonto(decimal.Parse(txtSaldoTotal.Text));
+            DialogResult dr = frm.ShowDialog(this);
+            if (dr == DialogResult.Cancel)
+            {
+                return;
+            }
 
-            //    try
-            //    {
-            //        FormaPago forma = frm.GetFormaDePago();
-            //        decimal importeRecibido = frm.GetImportePagado();
-            //        _servicioVentas.Pagar(venta, forma, importeRecibido);
-            //        MessageHelper.Mensaje(TipoMensaje.OK, "Pago efectuado!!!", "Operación Exitosa");
-            //        GridHelper.SetearFila(r, ctaCte);
-            //        btnIngresarPago.Enabled = false;
-            //    }
-            //    catch (Exception exception)
-            //    {
-            //        MessageHelper.Mensaje(TipoMensaje.Error, exception.Message, "ERROR");
-            //        btnIngresarPago.Enabled = false;
-            //    }
+            try
+            {
+                FormaPago forma = frm.GetFormaDePago();
+                decimal importeRecibido = frm.GetImportePagado();
+                //_servicioVentas.Pagar(venta, forma, importeRecibido);
+                MessageHelper.Mensaje(TipoMensaje.OK, "Pago efectuado!!!", "Operación Exitosa");
+                FormHelper.MostrarDatosEnGrilla(dgvDatos, lista);
+                //PagarIconButton.Enabled = false;
+            }
+            catch (Exception exception)
+            {
+                MessageHelper.Mensaje(TipoMensaje.Error, exception.Message, "ERROR");
+                //PagarIconButton.Enabled = false;
+            }
 
-            //    var ctaCte = frm.GetMovimientoCtaCte();
-            //    try
-            //    {
-            //        ServiciosCtasCtes.GetInstancia().Agregar(ctaCte);
-            //        DataGridViewRow r = new DataGridViewRow();
-            //        r.CreateCells(dgvDatos);
-            //        SetearFila(r, ctaCte);
-            //        AgregarFila(r);
-            //        txtSaldoTotal.Text = ServiciosCtasCtes.GetInstancia().GetSaldo(cliente).ToString("C");
+            var ctaCte = frm.GetMovimientoCtaCte();
+            //try
+            //{
+            //    _repoCtaCte.Agregar(ctaCte);
+            //    DataGridViewRow r = new DataGridViewRow();
+            //    r.CreateCells(dgvDatos);
+            //    GridHelper.SetearFila(r, ctaCte);
+            //    GridHelper.AgregarFila(dgvDatos, r);
+            //    txtSaldoTotal.Text = _repoCtaCte.GetSaldo(venta.ClienteId).ToString("C");
 
-            //    }
-            //    catch (Exception ex)
-            //    {
-
-            //        MessageBox.Show(ex.Message);
-            //    }
-            //    }
             //}
+            //catch (Exception ex)
+            //{
+
+            //    MessageBox.Show(ex.Message);
+            //}
+
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
