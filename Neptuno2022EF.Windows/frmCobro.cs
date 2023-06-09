@@ -22,11 +22,10 @@ namespace Neptuno2022EF.Windows
         private readonly IServiciosCtasCtes _serviciosCtasCtes;
         private readonly IServiciosVentas _serviciosVentas;
         
-        public frmCobro(IServiciosCtasCtes serviciosCtaCte, IServiciosVentas serviciosVentas)
+        public frmCobro()
         {
             InitializeComponent();
-            _serviciosCtasCtes = serviciosCtaCte;
-            _serviciosVentas = serviciosVentas;
+
         }
         private decimal monto;
         private decimal importe;
@@ -89,23 +88,23 @@ namespace Neptuno2022EF.Windows
             {
                 return;
             }
-            else if (importeRecibido <= 0)
+            else if (importeRecibido <= 0 || importeRecibido < monto)
             {
                 MessageHelper.Mensaje(TipoMensaje.Error, "Importe inferior a lo que se debe pagar", "Error");
                 return;
             }
 
             lblImporteRecibido.Text = importeRecibido.ToString("N2");
-            if (importeRecibido >= monto)
-            {
-                importe = monto;
+            //if (importeRecibido >= monto)
+            //{
+            //    importe = monto;
                 lblVuelto.Text = (importeRecibido - monto).ToString("N2");
 
-            }
-            else
-            {
-                importe = importeRecibido;
-            }
+            //}
+            //else
+            //{
+            //    importe = importeRecibido;
+            //}
         }
 
         public FormaPago GetFormaDePago()
@@ -124,7 +123,7 @@ namespace Neptuno2022EF.Windows
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            Close();
         }
 
         private void lblImporte_Click(object sender, EventArgs e)

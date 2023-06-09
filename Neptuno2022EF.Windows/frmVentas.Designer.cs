@@ -31,6 +31,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVentas));
             this.panelGrilla = new System.Windows.Forms.Panel();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.cmnNroVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,10 +60,12 @@
             this.tsbActualizar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbImprimir = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCambiarEstado = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbCerrar = new System.Windows.Forms.ToolStripButton();
-            this.btnCambiarEstado = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCobrar = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.panelGrilla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.panelInferior.SuspendLayout();
@@ -291,6 +294,8 @@
             this.toolStripSeparator5,
             this.btnCambiarEstado,
             this.toolStripSeparator3,
+            this.btnCobrar,
+            this.toolStripSeparator6,
             this.tsbCerrar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -378,6 +383,22 @@
             this.tsbImprimir.Text = "Imprimir";
             this.tsbImprimir.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 59);
+            // 
+            // btnCambiarEstado
+            // 
+            this.btnCambiarEstado.Image = ((System.Drawing.Image)(resources.GetObject("btnCambiarEstado.Image")));
+            this.btnCambiarEstado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCambiarEstado.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCambiarEstado.Name = "btnCambiarEstado";
+            this.btnCambiarEstado.Size = new System.Drawing.Size(97, 56);
+            this.btnCambiarEstado.Text = "Anular Venta";
+            this.btnCambiarEstado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -394,21 +415,21 @@
             this.tsbCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbCerrar.Click += new System.EventHandler(this.tsbCerrar_Click);
             // 
-            // btnCambiarEstado
+            // btnCobrar
             // 
-            this.btnCambiarEstado.Image = global::Neptuno2022EF.Windows.Properties.Resources.edit_file_32px;
-            this.btnCambiarEstado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCambiarEstado.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCambiarEstado.Name = "btnCambiarEstado";
-            this.btnCambiarEstado.Size = new System.Drawing.Size(97, 56);
-            this.btnCambiarEstado.Text = "Anular Venta";
-            this.btnCambiarEstado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
+            this.btnCobrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCobrar.Image")));
+            this.btnCobrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCobrar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCobrar.Name = "btnCobrar";
+            this.btnCobrar.Size = new System.Drawing.Size(58, 56);
+            this.btnCobrar.Text = "Cobrar";
+            this.btnCobrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCobrar.Click += new System.EventHandler(this.btnCobrar_Click);
             // 
-            // toolStripSeparator5
+            // toolStripSeparator6
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 59);
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 59);
             // 
             // frmVentas
             // 
@@ -467,5 +488,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton btnCambiarEstado;
+        private System.Windows.Forms.ToolStripButton btnCobrar;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
     }
 }

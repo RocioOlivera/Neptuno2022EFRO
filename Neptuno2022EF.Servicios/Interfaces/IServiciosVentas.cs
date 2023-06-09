@@ -24,6 +24,6 @@ namespace Neptuno2022EF.Servicios.Interfaces
         void Pagar(Venta venta, FormaPago forma, decimal importe);
         void Editar(Venta venta);
         Venta GetVentaPorId(int id);
-        void AnularVenta(Venta venta);
+        void CambiarEstado(Venta venta);
     }
 }

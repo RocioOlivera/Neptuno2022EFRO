@@ -299,10 +299,37 @@ namespace Neptuno2022EF.Windows
             try
             {
                 venta.Estado = Estado.Anulada;
-                _servicio.AnularVenta(venta);
+                _servicio.CambiarEstado(venta);
                 GridHelper.SetearFila(r, ventaDto);
                 RecargarGrilla();
                 MessageHelper.Mensaje(TipoMensaje.OK, "Venta anulada correctamente", "Mensaje");
+            }
+            catch (Exception exception)
+            {
+                MessageHelper.Mensaje(TipoMensaje.Error, exception.Message, "Error");
+            }
+        }
+
+        private void btnCobrar_Click(object sender, EventArgs e)
+        {
+            if (dgvDatos.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            var r = dgvDatos.SelectedRows[0];
+            var ventaDto = (VentaListDto)r.Tag;
+            frmCobro frm = new frmCobro() { Text = "Seleccionar método de cobro" };
+            frm.SetMonto(ventaDto.Total);
+            DialogResult dr = frm.ShowDialog(this);
+            var venta = _servicio.GetVentaPorId(ventaDto.VentaId);
+            try
+            {
+                venta.Estado = Estado.Paga;
+                _servicio.CambiarEstado(venta);
+                GridHelper.SetearFila(r, venta);
+                MessageHelper.Mensaje(TipoMensaje.OK, "Venta Pagada!!!", "Mensaje");
+                RecargarGrilla();
             }
             catch (Exception exception)
             {

@@ -207,7 +207,7 @@ namespace Neptuno2022EF.Servicios.Servicios
                 throw;
             }
         }
-        public void AnularVenta(Venta venta)
+        public void CambiarEstado(Venta venta)
         {
             try
             {

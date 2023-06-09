@@ -1,5 +1,6 @@
 ﻿using Neptuno2022EF.Datos.Interfaces;
 using Neptuno2022EF.Entidades.Dtos.CtaCte;
+using Neptuno2022EF.Entidades.Dtos.Venta;
 using Neptuno2022EF.Entidades.Entidades;
 using Neptuno2022EF.Entidades.Enums;
 using Neptuno2022EF.Servicios.Interfaces;
@@ -23,7 +24,6 @@ namespace Neptuno2022EF.Windows
         List<CtaCte> listaCta;
         private DetalleCtaCteListDto detalle;
         private Cliente cliente;
-        private Venta venta;
         public frmDetalleCtaCte(IServiciosCtasCtes servicioCtasCtes)
         {
             InitializeComponent();
@@ -39,7 +39,8 @@ namespace Neptuno2022EF.Windows
                 
                 if (lista.Count > 0)
                 {
-
+                    //txtCliente.Text = detalle.cliente.Nombre.ToString();
+                    //txtDomicilio.Text = detalle.cliente.Direccion.ToString();
                     FormHelper.MostrarDatosEnGrilla<DetalleCtaCteListDto>(dgvDatos, lista);
                     
                 }
@@ -53,13 +54,14 @@ namespace Neptuno2022EF.Windows
 
         private void frmDetalleCtaCte_Load(object sender, EventArgs e)
         {
+           
             txtSaldoTotal.Text = lista.Sum(x => x.Debe - x.Haber).ToString();
         }
 
         private void btnIngresarPago_Click(object sender, EventArgs e)
         {
 
-            frmCobro frm = new frmCobro(_servicioCtasCtes, _servicioVentas );
+            frmCobro frm = new frmCobro();
             frm.Text = "Ingreso de Pago";
             frm.SetMonto(decimal.Parse(txtSaldoTotal.Text));
             DialogResult dr = frm.ShowDialog(this);
@@ -70,7 +72,6 @@ namespace Neptuno2022EF.Windows
 
             try
             {
-                FormaPago forma = frm.GetFormaDePago();
                 decimal importeRecibido = frm.GetImportePagado();
                 //_servicioVentas.Pagar(venta, forma, importeRecibido);
                 MessageHelper.Mensaje(TipoMensaje.OK, "Pago efectuado!!!", "Operación Exitosa");
@@ -103,6 +104,11 @@ namespace Neptuno2022EF.Windows
         }
 
         private void btnOk_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCliente_TextChanged(object sender, EventArgs e)
         {
 
         }

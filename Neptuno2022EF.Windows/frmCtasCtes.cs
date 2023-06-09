@@ -33,7 +33,6 @@ namespace Neptuno2022EF.Windows
             try
             {
                 lista = _servicioCtaCte.GetCtasCtes();
-                //FormHelper.MostrarDatosEnGrilla(dgvDatos, lista);
                 MostrarDatosGrilla(lista);
             }
             catch (Exception)
@@ -76,17 +75,7 @@ namespace Neptuno2022EF.Windows
         }
         private void tsbDetalle_Click(object sender, EventArgs e)
         {
-            //if (dgvDatos.SelectedRows.Count > 0)
-            //{
-            //    frmDetalleCtaCte frm = new frmDetalleCtaCte();
-            //    frm.Text = "Detalle de Cta. Cte";
-            //    DataGridViewRow r = dgvDatos.CurrentRow;
-            //    var cta = (CtaCteListDto)r.Tag;
-            //    List<DetalleCtaCteListDto> listaMovimientosCtaCte = _servicio.GetDetalleCtasCtes(cta.ClienteId);
-            //    frm.SetCtaCte(listaMovimientosCtaCte);
-            //    DialogResult dr = frm.ShowDialog(this);
 
-            //}
             if (dgvDatos.SelectedRows.Count == 0)
             {
                 return;
