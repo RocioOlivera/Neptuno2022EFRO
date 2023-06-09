@@ -173,5 +173,9 @@ namespace Neptuno2022EF.Windows
             MostrarPaginado();
         }
 
+        private void tsbActualizar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

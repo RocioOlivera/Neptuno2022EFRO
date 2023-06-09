@@ -207,5 +207,18 @@ namespace Neptuno2022EF.Servicios.Servicios
                 throw;
             }
         }
+        public void AnularVenta(Venta venta)
+        {
+            try
+            {
+                _repositorio.AnularVenta(venta);
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
     }
 }

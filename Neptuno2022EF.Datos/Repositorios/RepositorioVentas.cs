@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 
 namespace Neptuno2022EF.Datos.Repositorios
 {
@@ -47,7 +48,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                 FechaVenta = v.FechaVenta,
                 Cliente = v.Cliente.Nombre,
                 Total = v.Total,
-                Estado = v.Estado.ToString()
+                Estado = v.Estado
             }).ToList();
         }
         public int GetCantidad()
@@ -70,7 +71,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                         FechaVenta = v.FechaVenta,
                         Cliente = v.Cliente.Nombre,
                         Total = v.Total,
-                        Estado = v.Estado.ToString()
+                        Estado = v.Estado
                     }).ToList();
             }
             catch (Exception)
@@ -89,7 +90,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                     FechaVenta = v.FechaVenta,
                     Cliente = v.Cliente.Nombre,
                     Total = v.Total,
-                    Estado = v.Estado.ToString()
+                    Estado = v.Estado
                 }).ToList();
         }
         public Venta GetVentaPorId(int id)
@@ -117,7 +118,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                     FechaVenta=v.FechaVenta,
                     Cliente=v.Cliente.Nombre,
                     Total=v.Total,
-                    Estado=v.Estado.ToString()
+                    Estado=v.Estado
                 }).ToList();
         }
         public List<VentaListDto> GetVentas(int clienteId)
@@ -131,7 +132,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                         FechaVenta = v.FechaVenta,
                         Cliente = v.Cliente.Nombre,
                         Total = v.Total,
-                        Estado = v.Estado.ToString()
+                        Estado = v.Estado
                     }).ToList();
             }
             catch (Exception)
@@ -153,6 +154,16 @@ namespace Neptuno2022EF.Datos.Repositorios
             };
         }
 
-
+        public void AnularVenta(Venta venta)
+        {
+            try
+            {
+                _context.Entry(venta).State = EntityState.Modified;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

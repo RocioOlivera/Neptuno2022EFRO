@@ -2,6 +2,7 @@
 using Neptuno2022EF.Entidades.Dtos.Producto;
 using Neptuno2022EF.Entidades.Dtos.Venta;
 using Neptuno2022EF.Entidades.Entidades;
+using Neptuno2022EF.Entidades.Enums;
 using Neptuno2022EF.Ioc;
 using Neptuno2022EF.Servicios.Interfaces;
 using Neptuno2022EF.Windows.Helpers;
@@ -207,7 +208,6 @@ namespace Neptuno2022EF.Windows
                 filtroOn = true;
                 RecargarGrilla();
                 tsbFiltrar.BackColor = Color.Orange;
-                tsbFiltrarFecha.Enabled = false;
             }
             catch (Exception)
             {
@@ -232,7 +232,6 @@ namespace Neptuno2022EF.Windows
                 filtroOn = true;
                 RecargarGrillaFiltroFecha();
                 tsbFiltrarFecha.BackColor = Color.Orange;
-                tsbFiltrar.Enabled = false;
 
 
             }
@@ -280,8 +279,6 @@ namespace Neptuno2022EF.Windows
             RecargarGrilla();
             tsbFiltrar.BackColor = Color.White;
             tsbFiltrarFecha.BackColor = Color.White;
-            tsbFiltrarFecha.Enabled = true;
-            tsbFiltrar.Enabled = true;
         }
 
         private void btnCambiarEstado_Click(object sender, EventArgs e)
@@ -290,16 +287,26 @@ namespace Neptuno2022EF.Windows
             {
                 return;
             }
+
             var r = dgvDatos.SelectedRows[0];
-            VentaListDto ventaDto = (VentaListDto)r.Tag;
-            var venta = _servicio.GetVentaPorId(ventaDto.VentaId);
-            DialogResult dr = MessageBox.Show("¿Está seguro que desea anular la venta?",
-                   "Confirmar",
-                   MessageBoxButtons.YesNo, MessageBoxIcon.Question,
-                   MessageBoxDefaultButton.Button2);
-            if (dr == DialogResult.No)
+            var ventaDto = (VentaListDto)r.Tag;
+            
+            if (ventaDto.Estado == Estado.Anulada || ventaDto.Estado == Estado.Paga)
             {
                 return;
+            }
+            var venta = _servicio.GetVentaPorId(ventaDto.VentaId);
+            try
+            {
+                venta.Estado = Estado.Anulada;
+                _servicio.AnularVenta(venta);
+                GridHelper.SetearFila(r, ventaDto);
+                RecargarGrilla();
+                MessageHelper.Mensaje(TipoMensaje.OK, "Venta anulada correctamente", "Mensaje");
+            }
+            catch (Exception exception)
+            {
+                MessageHelper.Mensaje(TipoMensaje.Error, exception.Message, "Error");
             }
         }
     }

@@ -19,5 +19,6 @@ namespace Neptuno2022EF.Datos.Interfaces
         //List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada);
         List<VentaListDto> FiltrarFecha(Func<Venta, bool> predicado, int cantidad, int pagina);
         void Editar(Venta venta);
+        void AnularVenta(Venta venta);
     }
 }
