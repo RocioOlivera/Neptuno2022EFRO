@@ -46,7 +46,7 @@
     <Compile Include="Dtos\Ciudad\CiudadListDto.cs" />
     <Compile Include="Dtos\Cliente\ClienteListDto.cs" />
     <Compile Include="Dtos\CtaCte\CtaCteListDto.cs" />
-    <Compile Include="Dtos\CtaCte\DetalleCtaCteListDto.cs" />
+    <Compile Include="Dtos\CtaCte\CtaCteDetalleDto.cs" />
     <Compile Include="Dtos\DetalleVenta\DetalleVentaListDto.cs" />
     <Compile Include="Dtos\Producto\ProductoListDto.cs" />
     <Compile Include="Dtos\Proveedor\ProveedorListDto.cs" />

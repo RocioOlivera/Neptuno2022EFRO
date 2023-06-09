@@ -19,8 +19,10 @@ namespace Neptuno2022EF.Servicios.Interfaces
         List<DetalleVentaListDto> GetDetalleVenta(int ventaId);
 
         void Guardar(Venta venta);
-        List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada);
+        //List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada);
+        List<VentaListDto> FiltrarFecha(Func<Venta, bool>predicado, int cantidad, int pagina);
         void Pagar(Venta venta, FormaPago forma, decimal importe);
         void Editar(Venta venta);
+        Venta GetVentaPorId(int id);
     }
 }

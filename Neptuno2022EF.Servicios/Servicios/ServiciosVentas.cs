@@ -110,19 +110,6 @@ namespace Neptuno2022EF.Servicios.Servicios
             }
         }
 
-        //public List<VentaListDto> GetFechas()
-        //{
-        //    try
-        //    {
-        //        return _repositorio.GetFechas();
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //}
-
         public List<VentaListDto> Filtrar(Func<Venta, bool> predicado, int cantidad, int pagina)
         {
             try
@@ -190,9 +177,9 @@ namespace Neptuno2022EF.Servicios.Servicios
             return $"PAGO {forma.ToString()} {venta.VentaId}";
         }
 
-        public List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada)
+        public List<VentaListDto> FiltrarFecha(Func<Venta, bool>predicado,int cantidad, int pagina)
         {
-            return _repositorio.FiltrarFecha(fechaSeleccionada);
+            return _repositorio.FiltrarFecha(predicado, cantidad, pagina);
         }
 
         public void Editar(Venta venta)
@@ -200,6 +187,19 @@ namespace Neptuno2022EF.Servicios.Servicios
             try
             {
                 _repositorio.Editar(venta);
+                _unitOfWork.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public Venta GetVentaPorId(int id)
+        {
+            try
+            {
+                return _repositorio.GetVentaPorId(id);
             }
             catch (Exception)
             {

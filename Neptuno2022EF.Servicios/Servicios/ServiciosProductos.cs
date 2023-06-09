@@ -33,12 +33,11 @@ namespace Neptuno2022EF.Servicios.Servicios
                 throw;
             }
         }
-
-        public void CancelarUnidadesEnPedido(int productoId, int cantidad)
+        public void CancelarUnidadesEnPedido(int productoId)
         {
             try
             {
-                _repositorio.CancelarUnidadesEnPedido(productoId, cantidad);
+                _repositorio.CancelarUnidadesEnPedido(productoId);
                 _unitOfWork.SaveChanges();
             }
             catch (Exception)

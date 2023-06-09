@@ -24,6 +24,20 @@ namespace Neptuno2022EF.Datos.Repositorios
             _context.Ventas.Add(venta);
         }
 
+        public void Editar(Venta venta)
+        {
+            try
+            {
+                var ventaInDb = GetVentaPorId(venta.VentaId);
+                _context.Entry(venta).State = EntityState.Modified;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<VentaListDto> Filtrar(Func<Venta, bool> predicado, int cantidad, int pagina)
         {
             return _context.Ventas.Include(v => v.Cliente).Where(predicado).OrderBy(v => v.FechaVenta)
@@ -44,12 +58,13 @@ namespace Neptuno2022EF.Datos.Repositorios
         {
             return _context.Ventas.Count(predicado);
         }
-        public List<VentaListDto> FiltrarFecha(DateTime fechaSeleccionada)
+       
+        public List<VentaListDto> FiltrarFecha(Func<Venta, bool>predicado, int cantidad, int pagina)
         {
             try
             {
                 return _context.Ventas.Include(v => v.Cliente).
-                    Where(v => v.FechaVenta == fechaSeleccionada).OrderBy(v => v.FechaVenta).Select(v => new VentaListDto
+                    Where(predicado).OrderBy(v => v.FechaVenta).Skip(cantidad * (pagina - 1)).Take(cantidad).Select(v => new VentaListDto
                     {
                         VentaId = v.VentaId,
                         FechaVenta = v.FechaVenta,
@@ -81,7 +96,7 @@ namespace Neptuno2022EF.Datos.Repositorios
         {
             try
             {
-                return _context.Ventas.Include(v => v.ClienteId).SingleOrDefault(v => v.VentaId == id);
+                return _context.Ventas.Include(v => v.Cliente).SingleOrDefault(v => v.VentaId == id);
 
             }
             catch (Exception)
@@ -138,19 +153,6 @@ namespace Neptuno2022EF.Datos.Repositorios
             };
         }
 
-        public void Editar(Venta venta)
-        {
-            try
-            {              
-                var ciudadInDb = GetVentaPorId(venta.VentaId);
 
-                _context.Entry(venta).State = EntityState.Modified;
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-        }
     }
 }

@@ -17,6 +17,7 @@ namespace Neptuno2022EF.Windows
         private readonly IServiciosClientes _servicioCliente;
         private readonly IServiciosProductos _servicioProductos;
         private Venta venta;
+        private Producto producto;
         public frmVentaAE(IServiciosClientes servicioCliente, IServiciosProductos servicioProductos)
         {
             InitializeComponent();
@@ -31,27 +32,18 @@ namespace Neptuno2022EF.Windows
         }
         private void CancelarButton_Click(object sender, EventArgs e)
         {
-            if (ValidarProductoComprado())
-            {
-                //Creo un instancia de item de carrito
-                //y le asigno sus valores
-                var itemCarrito = new ItemCarrito()
-                {
-                    ProductoId = producto.ProductoId,
-                    Descripcion = producto.NombreProducto,
-                    Precio = producto.PrecioUnitario,
-                    Cantidad = (int)nudCantidad.Value
-
-                };
-
-                _servicioProductos.CancelarUnidadesEnPedido(itemCarrito.ProductoId, itemCarrito.Cantidad);
-                DialogResult = DialogResult.Cancel;
-            }
+            ActualizarUnidadesDisponibles();
+            DialogResult = DialogResult.Cancel;
+            
         }
 
         private void ActualizarUnidadesDisponibles()
         {
-
+            if (Carrito.GetInstancia().GetCantidad() > 0)
+            {
+                _servicioProductos.CancelarUnidadesEnPedido(cliente.Id);
+            }
+            
         }
 
         private Cliente cliente;
@@ -99,17 +91,17 @@ namespace Neptuno2022EF.Windows
                 categoria = null;
             }
         }
-        ProductoListDto producto;
+        ProductoListDto productoListDto;
         private void cboProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboProducto.SelectedIndex > 0)
             {
-                producto = (ProductoListDto)cboProducto.SelectedItem;
+                productoListDto = (ProductoListDto)cboProducto.SelectedItem;
                 MostarDatosProducto();
             }
             else
             {
-                producto = null;
+                productoListDto = null;
                 LimpiarDatosProducto();
             }
         }
@@ -126,12 +118,12 @@ namespace Neptuno2022EF.Windows
 
         private void MostarDatosProducto()
         {
-            txtStock.Text = producto.UnidadesDisponibles.ToString();
-            txtPrecioUnit.Text = producto.PrecioUnitario.ToString();
-            if (producto.UnidadesDisponibles > 0)
+            txtStock.Text = productoListDto.UnidadesDisponibles.ToString();
+            txtPrecioUnit.Text = productoListDto.PrecioUnitario.ToString();
+            if (productoListDto.UnidadesDisponibles > 0)
             {
                 nudCantidad.Enabled = true;
-                nudCantidad.Maximum = producto.UnidadesDisponibles;
+                nudCantidad.Maximum = productoListDto.UnidadesDisponibles;
             }
             else
             {
@@ -141,9 +133,9 @@ namespace Neptuno2022EF.Windows
 
         private void nudCantidad_ValueChanged(object sender, EventArgs e)
         {
-            if (nudCantidad.Value > 0 && nudCantidad.Value <= producto.UnidadesDisponibles)
+            if (nudCantidad.Value > 0 && nudCantidad.Value <= productoListDto.UnidadesDisponibles)
             {
-                txtPrecioTotal.Text = ((decimal)nudCantidad.Value * producto.PrecioUnitario).ToString();
+                txtPrecioTotal.Text = ((decimal)nudCantidad.Value * productoListDto.PrecioUnitario).ToString();
             }
             else
             {
@@ -172,9 +164,9 @@ namespace Neptuno2022EF.Windows
                 //y le asigno sus valores
                 var itemCarrito = new ItemCarrito()
                 {
-                    ProductoId = producto.ProductoId,
-                    Descripcion = producto.NombreProducto,
-                    Precio = producto.PrecioUnitario,
+                    ProductoId = productoListDto.ProductoId,
+                    Descripcion = productoListDto.NombreProducto,
+                    Precio = productoListDto.PrecioUnitario,
                     Cantidad = (int)nudCantidad.Value
 
                 };

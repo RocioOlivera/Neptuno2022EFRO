@@ -33,10 +33,10 @@ namespace Neptuno2022EF.Datos.Repositorios
             productoInDb.UnidadesEnPedido += cantidad;
             _context.Entry(productoInDb).State = EntityState.Modified;
         }
-        public void CancelarUnidadesEnPedido(int productoId, int cantidad)
+        public void CancelarUnidadesEnPedido(int productoId)
         {
             var productoInDb = _context.Productos.SingleOrDefault(p => p.ProductoId == productoId);
-            productoInDb.UnidadesEnPedido =0;
+            productoInDb.UnidadesEnPedido = 0;
             _context.Entry(productoInDb).State = EntityState.Modified;
         }
 

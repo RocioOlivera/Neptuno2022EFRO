@@ -16,6 +16,6 @@ namespace Neptuno2022EF.Servicios.Interfaces
         List<ProductoListDto> GetProductos(int categoriaId);
         List<ProductoListDto> Filtrar(Func<Producto, bool> predicado);
         void ActualizarUnidadesEnPedido(int productoId, int cantidad);
-        void CancelarUnidadesEnPedido(int productoId, int cantidad);
+        void CancelarUnidadesEnPedido(int productoId);
     }
 }

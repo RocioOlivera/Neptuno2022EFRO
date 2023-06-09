@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelGrilla = new System.Windows.Forms.Panel();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
             this.cmnNroVenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,13 +54,15 @@
             this.tsbDetalle = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbFiltrar = new System.Windows.Forms.ToolStripButton();
+            this.tsbFiltrarFecha = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbActualizar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbImprimir = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbCerrar = new System.Windows.Forms.ToolStripButton();
-            this.tsbFiltrarFecha = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnCambiarEstado = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.panelGrilla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.panelInferior.SuspendLayout();
@@ -72,7 +74,7 @@
             this.panelGrilla.Controls.Add(this.dgvDatos);
             this.panelGrilla.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGrilla.Location = new System.Drawing.Point(0, 59);
-            this.panelGrilla.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelGrilla.Margin = new System.Windows.Forms.Padding(4);
             this.panelGrilla.Name = "panelGrilla";
             this.panelGrilla.Size = new System.Drawing.Size(1067, 421);
             this.panelGrilla.TabIndex = 11;
@@ -81,9 +83,9 @@
             // 
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle22.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cmnNroVenta,
@@ -93,7 +95,7 @@
             this.colEstado});
             this.dgvDatos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvDatos.Location = new System.Drawing.Point(0, 0);
-            this.dgvDatos.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dgvDatos.Margin = new System.Windows.Forms.Padding(4);
             this.dgvDatos.MultiSelect = false;
             this.dgvDatos.Name = "dgvDatos";
             this.dgvDatos.ReadOnly = true;
@@ -113,8 +115,8 @@
             // 
             // cmnFechaVenta
             // 
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.cmnFechaVenta.DefaultCellStyle = dataGridViewCellStyle23;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.cmnFechaVenta.DefaultCellStyle = dataGridViewCellStyle5;
             this.cmnFechaVenta.HeaderText = "Fecha Venta";
             this.cmnFechaVenta.MinimumWidth = 6;
             this.cmnFechaVenta.Name = "cmnFechaVenta";
@@ -131,8 +133,8 @@
             // 
             // cmnTotal
             // 
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cmnTotal.DefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cmnTotal.DefaultCellStyle = dataGridViewCellStyle6;
             this.cmnTotal.HeaderText = "Total";
             this.cmnTotal.MinimumWidth = 6;
             this.cmnTotal.Name = "cmnTotal";
@@ -161,7 +163,7 @@
             this.panelInferior.Controls.Add(this.label1);
             this.panelInferior.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelInferior.Location = new System.Drawing.Point(0, 480);
-            this.panelInferior.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelInferior.Margin = new System.Windows.Forms.Padding(4);
             this.panelInferior.Name = "panelInferior";
             this.panelInferior.Size = new System.Drawing.Size(1067, 74);
             this.panelInferior.TabIndex = 10;
@@ -170,7 +172,7 @@
             // 
             this.btnUltimo.Image = global::Neptuno2022EF.Windows.Properties.Resources.last_24px;
             this.btnUltimo.Location = new System.Drawing.Point(689, 16);
-            this.btnUltimo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnUltimo.Margin = new System.Windows.Forms.Padding(4);
             this.btnUltimo.Name = "btnUltimo";
             this.btnUltimo.Size = new System.Drawing.Size(100, 39);
             this.btnUltimo.TabIndex = 39;
@@ -181,7 +183,7 @@
             // 
             this.btnSiguiente.Image = global::Neptuno2022EF.Windows.Properties.Resources.next_24px;
             this.btnSiguiente.Location = new System.Drawing.Point(581, 16);
-            this.btnSiguiente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSiguiente.Margin = new System.Windows.Forms.Padding(4);
             this.btnSiguiente.Name = "btnSiguiente";
             this.btnSiguiente.Size = new System.Drawing.Size(100, 39);
             this.btnSiguiente.TabIndex = 40;
@@ -192,7 +194,7 @@
             // 
             this.btnAnterior.Image = global::Neptuno2022EF.Windows.Properties.Resources.previous_24px;
             this.btnAnterior.Location = new System.Drawing.Point(473, 16);
-            this.btnAnterior.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnAnterior.Margin = new System.Windows.Forms.Padding(4);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(100, 39);
             this.btnAnterior.TabIndex = 41;
@@ -203,7 +205,7 @@
             // 
             this.btnPrimero.Image = global::Neptuno2022EF.Windows.Properties.Resources.first_24px;
             this.btnPrimero.Location = new System.Drawing.Point(365, 16);
-            this.btnPrimero.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrimero.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrimero.Name = "btnPrimero";
             this.btnPrimero.Size = new System.Drawing.Size(100, 39);
             this.btnPrimero.TabIndex = 42;
@@ -286,6 +288,8 @@
             this.tsbActualizar,
             this.toolStripSeparator2,
             this.tsbImprimir,
+            this.toolStripSeparator5,
+            this.btnCambiarEstado,
             this.toolStripSeparator3,
             this.tsbCerrar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -332,6 +336,22 @@
             this.tsbFiltrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbFiltrar.Click += new System.EventHandler(this.tsbFiltrar_Click_1);
             // 
+            // tsbFiltrarFecha
+            // 
+            this.tsbFiltrarFecha.Image = global::Neptuno2022EF.Windows.Properties.Resources.filter_32px;
+            this.tsbFiltrarFecha.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbFiltrarFecha.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbFiltrarFecha.Name = "tsbFiltrarFecha";
+            this.tsbFiltrarFecha.Size = new System.Drawing.Size(93, 56);
+            this.tsbFiltrarFecha.Text = "Filtrar Fecha";
+            this.tsbFiltrarFecha.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbFiltrarFecha.Click += new System.EventHandler(this.tsbFiltrarFecha_Click_1);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 59);
+            // 
             // tsbActualizar
             // 
             this.tsbActualizar.Image = global::Neptuno2022EF.Windows.Properties.Resources.restart_32px;
@@ -374,21 +394,21 @@
             this.tsbCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.tsbCerrar.Click += new System.EventHandler(this.tsbCerrar_Click);
             // 
-            // tsbFiltrarFecha
+            // btnCambiarEstado
             // 
-            this.tsbFiltrarFecha.Image = global::Neptuno2022EF.Windows.Properties.Resources.filter_32px;
-            this.tsbFiltrarFecha.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbFiltrarFecha.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbFiltrarFecha.Name = "tsbFiltrarFecha";
-            this.tsbFiltrarFecha.Size = new System.Drawing.Size(93, 56);
-            this.tsbFiltrarFecha.Text = "Filtrar Fecha";
-            this.tsbFiltrarFecha.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsbFiltrarFecha.Click += new System.EventHandler(this.tsbFiltrarFecha_Click_1);
+            this.btnCambiarEstado.Image = global::Neptuno2022EF.Windows.Properties.Resources.edit_file_32px;
+            this.btnCambiarEstado.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCambiarEstado.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCambiarEstado.Name = "btnCambiarEstado";
+            this.btnCambiarEstado.Size = new System.Drawing.Size(97, 56);
+            this.btnCambiarEstado.Text = "Anular Venta";
+            this.btnCambiarEstado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
             // 
-            // toolStripSeparator4
+            // toolStripSeparator5
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 59);
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 59);
             // 
             // frmVentas
             // 
@@ -398,7 +418,7 @@
             this.Controls.Add(this.panelGrilla);
             this.Controls.Add(this.panelInferior);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmVentas";
             this.Text = "frmVentas";
             this.Load += new System.EventHandler(this.frmVentas_Load);
@@ -445,5 +465,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEstado;
         private System.Windows.Forms.ToolStripButton tsbFiltrarFecha;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton btnCambiarEstado;
     }
 }
