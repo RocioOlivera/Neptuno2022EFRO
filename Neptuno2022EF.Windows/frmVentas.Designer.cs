@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVentas));
             this.panelGrilla = new System.Windows.Forms.Panel();
             this.dgvDatos = new System.Windows.Forms.DataGridView();
@@ -63,9 +63,9 @@
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCambiarEstado = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbCerrar = new System.Windows.Forms.ToolStripButton();
             this.btnCobrar = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbCerrar = new System.Windows.Forms.ToolStripButton();
             this.panelGrilla.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDatos)).BeginInit();
             this.panelInferior.SuspendLayout();
@@ -86,9 +86,9 @@
             // 
             this.dgvDatos.AllowUserToAddRows = false;
             this.dgvDatos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Silver;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.dgvDatos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cmnNroVenta,
@@ -107,6 +107,7 @@
             this.dgvDatos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDatos.Size = new System.Drawing.Size(1067, 421);
             this.dgvDatos.TabIndex = 3;
+            this.dgvDatos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDatos_CellContentClick);
             // 
             // cmnNroVenta
             // 
@@ -118,8 +119,8 @@
             // 
             // cmnFechaVenta
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.cmnFechaVenta.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.cmnFechaVenta.DefaultCellStyle = dataGridViewCellStyle2;
             this.cmnFechaVenta.HeaderText = "Fecha Venta";
             this.cmnFechaVenta.MinimumWidth = 6;
             this.cmnFechaVenta.Name = "cmnFechaVenta";
@@ -136,8 +137,8 @@
             // 
             // cmnTotal
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.cmnTotal.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.cmnTotal.DefaultCellStyle = dataGridViewCellStyle3;
             this.cmnTotal.HeaderText = "Total";
             this.cmnTotal.MinimumWidth = 6;
             this.cmnTotal.Name = "cmnTotal";
@@ -404,17 +405,6 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 59);
             // 
-            // tsbCerrar
-            // 
-            this.tsbCerrar.Image = global::Neptuno2022EF.Windows.Properties.Resources.close_window_32px;
-            this.tsbCerrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.tsbCerrar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbCerrar.Name = "tsbCerrar";
-            this.tsbCerrar.Size = new System.Drawing.Size(53, 56);
-            this.tsbCerrar.Text = "Cerrar";
-            this.tsbCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.tsbCerrar.Click += new System.EventHandler(this.tsbCerrar_Click);
-            // 
             // btnCobrar
             // 
             this.btnCobrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCobrar.Image")));
@@ -430,6 +420,17 @@
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 59);
+            // 
+            // tsbCerrar
+            // 
+            this.tsbCerrar.Image = global::Neptuno2022EF.Windows.Properties.Resources.close_window_32px;
+            this.tsbCerrar.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.tsbCerrar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbCerrar.Name = "tsbCerrar";
+            this.tsbCerrar.Size = new System.Drawing.Size(53, 56);
+            this.tsbCerrar.Text = "Cerrar";
+            this.tsbCerrar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.tsbCerrar.Click += new System.EventHandler(this.tsbCerrar_Click);
             // 
             // frmVentas
             // 

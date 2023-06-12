@@ -16,5 +16,6 @@ namespace Neptuno2022EF.Servicios.Interfaces
         void Guardar(CtaCte ctaCte);
         decimal GetSaldo(int clienteId);
         void Agregar(CtaCte ctaCte);
+        CtaCte GetCtaCtePorId(int id);
     }
 }

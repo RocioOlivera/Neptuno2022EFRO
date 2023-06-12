@@ -85,7 +85,7 @@ namespace Neptuno2022EF.Windows
 
         private void tsbNuevo_Click(object sender, EventArgs e)
         {
-            frmVentaAE frm = new frmVentaAE(DI.Create<IServiciosClientes>(), DI.Create<IServiciosProductos>()) { Text = "Nueva Venta" };
+            frmVentaAE frm = new frmVentaAE(DI.Create<IServiciosClientes>(), DI.Create<IServiciosProductos>(), DI.Create<IServiciosCtasCtes>()) { Text = "Nueva Venta" };
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel)
             {
@@ -291,7 +291,7 @@ namespace Neptuno2022EF.Windows
             var r = dgvDatos.SelectedRows[0];
             var ventaDto = (VentaListDto)r.Tag;
             
-            if (ventaDto.Estado == Estado.Anulada || ventaDto.Estado == Estado.Paga)
+            if (ventaDto.Estado == Estado.Anulada.ToString() || ventaDto.Estado == Estado.Paga.ToString())
             {
                 return;
             }
@@ -335,6 +335,11 @@ namespace Neptuno2022EF.Windows
             {
                 MessageHelper.Mensaje(TipoMensaje.Error, exception.Message, "Error");
             }
+        }
+
+        private void dgvDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
     

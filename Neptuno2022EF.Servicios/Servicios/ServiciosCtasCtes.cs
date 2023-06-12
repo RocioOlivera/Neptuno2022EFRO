@@ -39,6 +39,19 @@ namespace Neptuno2022EF.Servicios.Servicios
             }
         }
 
+        public CtaCte GetCtaCtePorId(int id)
+        {
+            try
+            {
+                return _repositorio.GetCtaCtePorId(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<CtaCteListDto> GetCtasCtes()
         {
             try
@@ -77,6 +90,7 @@ namespace Neptuno2022EF.Servicios.Servicios
                 throw;
             }
         }
+
 
         public void Guardar(CtaCte ctaCte)
         {

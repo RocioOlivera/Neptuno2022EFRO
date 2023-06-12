@@ -48,7 +48,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                 FechaVenta = v.FechaVenta,
                 Cliente = v.Cliente.Nombre,
                 Total = v.Total,
-                Estado = v.Estado
+                Estado = v.Estado.ToString(),
             }).ToList();
         }
         public int GetCantidad()
@@ -71,7 +71,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                         FechaVenta = v.FechaVenta,
                         Cliente = v.Cliente.Nombre,
                         Total = v.Total,
-                        Estado = v.Estado
+                        Estado = v.Estado.ToString()
                     }).ToList();
             }
             catch (Exception)
@@ -90,7 +90,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                     FechaVenta = v.FechaVenta,
                     Cliente = v.Cliente.Nombre,
                     Total = v.Total,
-                    Estado = v.Estado
+                    Estado = v.Estado.ToString()
                 }).ToList();
         }
         public Venta GetVentaPorId(int id)
@@ -118,7 +118,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                     FechaVenta=v.FechaVenta,
                     Cliente=v.Cliente.Nombre,
                     Total=v.Total,
-                    Estado=v.Estado
+                    Estado=v.Estado.ToString()
                 }).ToList();
         }
         public List<VentaListDto> GetVentas(int clienteId)
@@ -132,7 +132,7 @@ namespace Neptuno2022EF.Datos.Repositorios
                         FechaVenta = v.FechaVenta,
                         Cliente = v.Cliente.Nombre,
                         Total = v.Total,
-                        Estado = v.Estado
+                        Estado = v.Estado.ToString(),
                     }).ToList();
             }
             catch (Exception)

@@ -16,13 +16,16 @@ namespace Neptuno2022EF.Windows
     {
         private readonly IServiciosClientes _servicioCliente;
         private readonly IServiciosProductos _servicioProductos;
+        private readonly IServiciosCtasCtes _serviciosCtasCtes;
         private Venta venta;
         private Producto producto;
-        public frmVentaAE(IServiciosClientes servicioCliente, IServiciosProductos servicioProductos)
+
+        public frmVentaAE(IServiciosClientes servicioCliente, IServiciosProductos servicioProductos, IServiciosCtasCtes serviciosCtasCtes)
         {
             InitializeComponent();
             _servicioCliente = servicioCliente;
             _servicioProductos = servicioProductos;
+            _serviciosCtasCtes = serviciosCtasCtes;
         }
         protected override void OnLoad(EventArgs e)
         {
@@ -216,15 +219,31 @@ namespace Neptuno2022EF.Windows
                     ClienteId = cliente.Id,
                     FechaVenta = dtpFechaVenta.Value,
                     Total = Carrito.GetInstancia().GetTotal(),
-                    Estado=Estado.Impaga,
+                    Estado= Estado.Impaga,
                     Detalles = detalle
                 };
-
                 Carrito.GetInstancia().LimpiarCarrito();
+                
+                var ctaCte = new CtaCte
+                {
+                    FechaMovimiento = DateTime.Now,
+                    ClienteId = venta.ClienteId,
+                    Debe = venta.Total,
+                    Haber = 0,
+                    Saldo = venta.Total,
+                    Movimiento = $"FACT {venta.VentaId}"
 
-                DialogResult=DialogResult.OK;
+                };
+                
+                _serviciosCtasCtes.Agregar(ctaCte);
+                DialogResult = DialogResult.OK;
+
             }
         }
+        //public string ConstruirMovimiento(Venta venta )
+        //{
+        //    return $"FACT {venta.VentaId}";
+        //}
 
         private bool ValidarVenta()
         {

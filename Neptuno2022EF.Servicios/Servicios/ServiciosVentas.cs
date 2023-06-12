@@ -154,6 +154,8 @@ namespace Neptuno2022EF.Servicios.Servicios
 
             //venta.Estado = Estado.Paga;
             //_repositorio.Editar(venta);
+            venta.Estado = Estado.Paga;
+            _repositorio.Editar(venta);
             //var saldo = _repoCtasCtes.GetSaldo(venta.ClienteId);//consulto el saldo del cliente
             var saldo = _repoCtasCtes.GetSaldo(venta.ClienteId);
 

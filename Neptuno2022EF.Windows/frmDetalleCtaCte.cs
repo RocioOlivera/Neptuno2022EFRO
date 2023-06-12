@@ -61,14 +61,17 @@ namespace Neptuno2022EF.Windows
         private void btnIngresarPago_Click(object sender, EventArgs e)
         {
 
-            frmCobro frm = new frmCobro();
-            frm.Text = "Ingreso de Pago";
+            frmCobro frm = new frmCobro() { Text = "Seleccionar método de cobro" }; 
             frm.SetMonto(decimal.Parse(txtSaldoTotal.Text));
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel)
             {
                 return;
             }
+
+            var r = dgvDatos.SelectedRows[0];
+            var ctaDto = (CtaCteListDto)r.Tag;
+            _servicioCtasCtes.GetCtaCtePorId(ctaDto.CtaCteId);
 
             try
             {
