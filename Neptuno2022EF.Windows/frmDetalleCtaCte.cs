@@ -3,7 +3,9 @@ using Neptuno2022EF.Entidades.Dtos.CtaCte;
 using Neptuno2022EF.Entidades.Dtos.Venta;
 using Neptuno2022EF.Entidades.Entidades;
 using Neptuno2022EF.Entidades.Enums;
+using Neptuno2022EF.Ioc;
 using Neptuno2022EF.Servicios.Interfaces;
+using Neptuno2022EF.Servicios.Servicios;
 using Neptuno2022EF.Windows.Helpers;
 using Neptuno2022EF.Windows.Helpers.Enum;
 using NuevaAppComercial2022.Entidades.Entidades;
@@ -16,7 +18,7 @@ namespace Neptuno2022EF.Windows
 {
     public partial class frmDetalleCtaCte : Form
     {
-        private readonly IServiciosVentas _servicioVentas;
+        private readonly IServiciosClientes _serviciosClientes;
         private readonly IServiciosCtasCtes _servicioCtasCtes;
         private readonly IRepositorioCtasCtes _repoCtaCte;
         private readonly IRepositorioVentas _repositorioVentas;
@@ -24,11 +26,11 @@ namespace Neptuno2022EF.Windows
         List<CtaCte> listaCta;
         private DetalleCtaCteListDto detalle;
         private Cliente cliente;
-        public frmDetalleCtaCte(IServiciosCtasCtes servicioCtasCtes)
+        public frmDetalleCtaCte(IServiciosCtasCtes servicioCtasCtes, IServiciosClientes serviciosClientes)
         {
             InitializeComponent();
             _servicioCtasCtes= servicioCtasCtes;
-            //_repositorioVentas= repositorioVentas;
+            _serviciosClientes= serviciosClientes;
         }
         
         protected override void OnLoad(EventArgs e)
@@ -61,7 +63,7 @@ namespace Neptuno2022EF.Windows
         private void btnIngresarPago_Click(object sender, EventArgs e)
         {
 
-            frmCobro frm = new frmCobro() { Text = "Seleccionar método de cobro" }; 
+            frmCobro frm = new frmCobro(DI.Create<IServiciosCtasCtes>(),DI.Create<IServiciosClientes>(), DI.Create<IServiciosVentas>()) { Text = "Ingresar pago..." }; 
             frm.SetMonto(decimal.Parse(txtSaldoTotal.Text));
             DialogResult dr = frm.ShowDialog(this);
             if (dr == DialogResult.Cancel)
@@ -69,25 +71,54 @@ namespace Neptuno2022EF.Windows
                 return;
             }
 
-            var r = dgvDatos.SelectedRows[0];
-            var ctaDto = (CtaCteListDto)r.Tag;
-            _servicioCtasCtes.GetCtaCtePorId(ctaDto.CtaCteId);
+            //var r = dgvDatos.SelectedRows[0];
+            //var ctaDto = (CtaCteListDto)r.Tag;
+            //_servicioCtasCtes.GetCtaCtePorId(ctaDto.CtaCteId);
 
             try
             {
-                decimal importeRecibido = frm.GetImportePagado();
-                //_servicioVentas.Pagar(venta, forma, importeRecibido);
-                MessageHelper.Mensaje(TipoMensaje.OK, "Pago efectuado!!!", "Operación Exitosa");
+                var ctaCte = frm.GetMovimientoCtaCte();
+                _servicioCtasCtes.Guardar(ctaCte);
+                MessageBox.Show("Cuenta corriente actualizada!", "Mensaje",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 FormHelper.MostrarDatosEnGrilla(dgvDatos, lista);
-                //PagarIconButton.Enabled = false;
             }
-            catch (Exception exception)
+            catch (Exception)
             {
-                MessageHelper.Mensaje(TipoMensaje.Error, exception.Message, "ERROR");
-                //PagarIconButton.Enabled = false;
+
+                throw;
             }
 
-            var ctaCte = frm.GetMovimientoCtaCte();
+            //var ctaCte = new CtaCte
+            //{
+            //    FechaMovimiento = DateTime.Now,
+            //    ClienteId = ctaDto.ClienteId,
+            //    Debe = 0,
+            //    Haber = ctaDto.Saldo,
+            //    Saldo = 0,
+            //    Movimiento = $"FACT {ctaDto.CtaCteId}"
+            //};
+
+            //_servicioCtasCtes.Agregar(ctaCte);
+            //DialogResult = DialogResult.OK;
+            //MessageHelper.Mensaje(TipoMensaje.OK, "Pago efectuado!!!", "Operación Exitosa");
+            //FormHelper.MostrarDatosEnGrilla(dgvDatos, lista);
+            //try
+            //{
+            //    decimal importeRecibido = frm.GetImportePagado();
+
+
+
+
+            //    PagarIconButton.Enabled = false;
+            //}
+            //catch (Exception exception)
+            //{
+            //    MessageHelper.Mensaje(TipoMensaje.Error, exception.Message, "ERROR");
+            //    PagarIconButton.Enabled = false;
+            //}
+
+            //var ctaCte = frm.GetMovimientoCtaCte();
             //try
             //{
             //    _repoCtaCte.Agregar(ctaCte);

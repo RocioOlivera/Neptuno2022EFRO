@@ -5,6 +5,7 @@ using Neptuno2022EF.Entidades.Entidades;
 using Neptuno2022EF.Entidades.Enums;
 using Neptuno2022EF.Ioc;
 using Neptuno2022EF.Servicios.Interfaces;
+using Neptuno2022EF.Servicios.Servicios;
 using Neptuno2022EF.Windows.Helpers;
 using Neptuno2022EF.Windows.Helpers.Enum;
 using System;
@@ -22,6 +23,7 @@ namespace Neptuno2022EF.Windows
     public partial class frmVentas : Form
     {
         private readonly IServiciosVentas _servicio;
+        private readonly IServiciosCtasCtes _serviciosCtasCtes;
         private List<VentaListDto> lista;
 
         private int cantidadPorPagina = 10;
@@ -30,10 +32,11 @@ namespace Neptuno2022EF.Windows
         private int paginaActual = 1;
 
         private bool filtroOn = false;
-        public frmVentas(IServiciosVentas servicio)
+        public frmVentas(IServiciosVentas servicio, IServiciosCtasCtes serviciosCtasCtes)
         {
             InitializeComponent();
             _servicio = servicio;
+            _serviciosCtasCtes = serviciosCtasCtes;
         }
 
         private void tsbCerrar_Click(object sender, EventArgs e)
@@ -98,7 +101,7 @@ namespace Neptuno2022EF.Windows
                 MessageBox.Show("Venta guardada", "Mensaje",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 RecargarGrilla();
-                venta = null;
+                //venta = null;
             }
             catch (Exception)
             {
@@ -319,22 +322,36 @@ namespace Neptuno2022EF.Windows
 
             var r = dgvDatos.SelectedRows[0];
             var ventaDto = (VentaListDto)r.Tag;
-            frmCobro frm = new frmCobro() { Text = "Seleccionar método de cobro" };
+            frmCobro frm = new frmCobro(DI.Create<IServiciosCtasCtes>(),DI.Create<IServiciosClientes>(), DI.Create<IServiciosVentas>()) { Text = "Introducir pago..." };
             frm.SetMonto(ventaDto.Total);
             DialogResult dr = frm.ShowDialog(this);
             var venta = _servicio.GetVentaPorId(ventaDto.VentaId);
             try
-            {
+            {   
+                var ctaCte = new CtaCte
+                {
+                    FechaMovimiento = DateTime.Now,
+                    ClienteId = venta.ClienteId,
+                    Debe = 0,
+                    Haber = venta.Total,
+                    Saldo = 0,
+                    Movimiento = $"PAGO EFECT. {venta.VentaId}"
+                };
+
+                _serviciosCtasCtes.Agregar(ctaCte);
+
+
                 venta.Estado = Estado.Paga;
                 _servicio.CambiarEstado(venta);
                 GridHelper.SetearFila(r, venta);
-                MessageHelper.Mensaje(TipoMensaje.OK, "Venta Pagada!!!", "Mensaje");
-                RecargarGrilla();
+                //MessageHelper.Mensaje(TipoMensaje.OK, "Venta Pagada!!!", "Mensaje");
+                //RecargarGrilla();
             }
             catch (Exception exception)
             {
                 MessageHelper.Mensaje(TipoMensaje.Error, exception.Message, "Error");
             }
+
         }
 
         private void dgvDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)

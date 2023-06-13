@@ -1,6 +1,7 @@
 ﻿using Neptuno2022EF.Entidades.Dtos.CtaCte;
 using Neptuno2022EF.Entidades.Dtos.Venta;
 using Neptuno2022EF.Entidades.Entidades;
+using Neptuno2022EF.Ioc;
 using Neptuno2022EF.Servicios.Interfaces;
 using Neptuno2022EF.Windows.Helpers;
 using System;
@@ -85,7 +86,7 @@ namespace Neptuno2022EF.Windows
             try
             {
                 List<DetalleCtaCteListDto> ctaCteDetalleDto = _servicioCtaCte.GetDetalleCtasCtes(cta.ClienteId);
-                frmDetalleCtaCte frm = new frmDetalleCtaCte(_servicioCtaCte) { Text = "Detalle de la Cuenta" };
+                frmDetalleCtaCte frm = new frmDetalleCtaCte(DI.Create<IServiciosCtasCtes>(),DI.Create<IServiciosClientes>()) { Text = "Detalle de la Cuenta" };
                 frm.SetCtaCte(ctaCteDetalleDto);
                 frm.ShowDialog(this);
             }

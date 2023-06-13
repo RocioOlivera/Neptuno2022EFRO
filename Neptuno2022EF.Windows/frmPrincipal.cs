@@ -56,7 +56,7 @@ namespace Neptuno2022EF.Windows
 
         private void btnVentas_Click(object sender, EventArgs e)
         {
-            frmVentas frm=new frmVentas(DI.Create<IServiciosVentas>());
+            frmVentas frm=new frmVentas(DI.Create<IServiciosVentas>(), DI.Create<IServiciosCtasCtes>());
             frm.ShowDialog(this);
         }
 

@@ -26,7 +26,16 @@ namespace Neptuno2022EF.Datos.Repositorios
 
         public CtaCte GetCtaCtePorId(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _context.CtasCtes.Include(c => c.Cliente).SingleOrDefault(c => c.CtaCteId == id);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         public List<CtaCteListDto> GetCtasCtes()

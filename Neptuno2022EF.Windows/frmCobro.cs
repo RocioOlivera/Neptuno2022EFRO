@@ -3,8 +3,10 @@ using Neptuno2022EF.Datos.Interfaces;
 using Neptuno2022EF.Entidades.Entidades;
 using Neptuno2022EF.Entidades.Enums;
 using Neptuno2022EF.Servicios.Interfaces;
+using Neptuno2022EF.Windows.Classes;
 using Neptuno2022EF.Windows.Helpers;
 using Neptuno2022EF.Windows.Helpers.Enum;
+using NuevaAppComercial2022.Entidades.Entidades;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,15 +23,19 @@ namespace Neptuno2022EF.Windows
     {
         private readonly IServiciosCtasCtes _serviciosCtasCtes;
         private readonly IServiciosVentas _serviciosVentas;
+        private readonly IServiciosClientes _serviciosClientes;
         
-        public frmCobro()
+        public frmCobro(IServiciosCtasCtes serviciosCta, IServiciosClientes serviciosClientes, IServiciosVentas serviciosVentas)
         {
             InitializeComponent();
-
+            _serviciosCtasCtes=serviciosCta;
+            _serviciosClientes = serviciosClientes;
+            _serviciosVentas= serviciosVentas;
         }
         private decimal monto;
         private decimal importe;
-        private FormaPago formaPago = 0;
+        private FormaPago formaPago;
+        private int clienteId;
         
         private CtaCte ctaCte;
         private Venta venta;
@@ -40,32 +46,56 @@ namespace Neptuno2022EF.Windows
         }
         private void btnOk_Click(object sender, EventArgs e)
         {
-            if (ValidarDatos())
-            {
-                //venta.Estado = Estado.Paga;
-                //_serviciosVentas.Editar(venta);
-                //var saldo = _serviciosCtasCtes.GetSaldo(venta.ClienteId);//consulto el saldo del cliente
-                //var saldo = _repositorioCtasCtes.GetSaldo();
+            //if (ValidarDatos())
+            //{
+            //    var ctaCte = new CtaCte
+            //    {
+            //        FechaMovimiento = DateTime.Now,
+            //        ClienteId = venta.ClienteId,
+            //        Debe = monto - importe,
+            //        Haber = importe,
+            //        Saldo = monto - importe,
+            //        Movimiento = $"PAGO EFECT. {venta.VentaId}"
 
-                //Creo la clase ctacte y le paso los datos
-                var ctaCte = new CtaCte
-                {
-                    FechaMovimiento = DateTime.Now,
-                    ClienteId = 2,
-                    Debe = monto - importe,
-                    Haber = importe,
-                    Saldo = monto - importe,
-                    Movimiento = ConstruirMovimiento()
+            //    };
 
-                };
-                _serviciosCtasCtes.Agregar(ctaCte);
-                DialogResult = DialogResult.OK;
-            }
+            //    _serviciosCtasCtes.Agregar(ctaCte);
+
+            //    DialogResult = DialogResult.OK;
+
+            //}
+
+
+            //if (ValidarDatos())
+            //{
+            //venta.Estado = Estado.Paga;
+            //_serviciosVentas.Editar(venta);
+
+            //var saldo = _serviciosCtasCtes.GetSaldo(venta.ClienteId);//consulto el saldo del cliente
+
+
+
+            //var saldo = _repositorioCtasCtes.GetSaldo();
+
+            //Creo la clase ctacte y le paso los datos
+            //var ctaCte = new CtaCte
+            //{
+            //    FechaMovimiento = DateTime.Now,
+            //    ClienteId = 2,
+            //    Debe = monto - importe,
+            //    Haber = importe,
+            //    Saldo = monto - importe,
+            //    Movimiento = ConstruirMovimiento()
+
+            //};
+            //_serviciosCtasCtes.Agregar(ctaCte);
+            //DialogResult = DialogResult.OK;
+            //}
         }
-        private string ConstruirMovimiento()
-        {
-            return $"PAGO ";
-        }
+        //private string ConstruirMovimiento()
+        //{
+        //    return $"PAGO ";
+        //}
         private bool ValidarDatos()
         {
             bool valido = true;
@@ -139,6 +169,49 @@ namespace Neptuno2022EF.Windows
         public CtaCte GetMovimientoCtaCte()
         {
             return ctaCte;
+        }
+        private Cliente cliente;
+        private void btnOk_Click_1(object sender, EventArgs e)
+        {
+            //Venta venta=new Venta();
+            //if (ValidarDatos())
+            //{
+            //    var ctaCte = new CtaCte
+            //    {
+            //        FechaMovimiento = DateTime.Now,
+            //        ClienteId = venta.ClienteId,
+            //        Debe = 0,
+            //        Haber = venta.Total,
+            //        Saldo = 0,
+            //        Movimiento = $"PAGO EFECT. {venta.VentaId}"
+            //    };
+
+                //_serviciosCtasCtes.Agregar(ctaCte);
+
+                //ctaCte = new CtaCte
+                //{
+                //    FechaMovimiento = DateTime.Now,
+                //    ClienteId = 2,
+                //    Debe = monto - importe,
+                //    Haber = importe,
+                //    Saldo = monto - importe,
+                //    Movimiento = "PAGO EFECT."
+
+                //};
+
+                //_serviciosCtasCtes.Agregar(ctaCte);
+
+                DialogResult = DialogResult.OK;
+                MessageHelper.Mensaje(TipoMensaje.OK, "Venta Pagada!!!", "Mensaje");
+            //}
+
+
+
+        }
+
+        public void SetCliente(int clienteId)
+        {
+            this.clienteId = clienteId;
         }
     }
 }
